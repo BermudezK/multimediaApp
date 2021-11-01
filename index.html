@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es" Copyright (c) 2017 Copyright Holder All Rights Reserved.>
+  <head>
+    <meta charset="utf-8">
+    <title>Servidor Multimedia</title>
+    <!--<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">-->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link href="css/main.css" crossorigin="anonymous" rel="stylesheet">
+  </head>
+  <body class="fuente">
+      <header>
+          <h1>Servidor multimedia con node.js</h1>
+      </header>
+    <div class="container">
+      <section>
+        <h1><samp class="label label-warning">Hablemos un poco de streaming... :)</span></h1>
+          <br>
+          <div class="well">
+          <p>Los tipos de Streaming son dos:</p>
+          <p><b>Streaming Live:</b> es la transmisión de un evento que se emite en el mismo instante que esta sucediendo; Es un sin parar de eventos y sucesos que podemos transmitir via Internet desde un Servidor hacia uno o muchos clientes como en el caso presentado. </p>
+          <p><b>Streaming On-Demand:</b>se refiere a que nuestras transmisiones serán de archivos ya grabados con anterioridad y que dicho archivo debe estar en el disco duro de nuestro ordenador.</p>
+          <br>
+          <p>Veamos los siguientes ejemplos:</p>
+        </div>
+        <form action="videos" method="get">
+            <input type="submit" value="Streaming On-Demand" id="multimedia" class="btn btn-defoult btn-block intput-text">
+        </form>
+        <br>
+        <form action="streamC" method="post">
+            <input type="submit" value="Streaming Live: Client" id="multimedia" class="btn btn-defoult btn-block intput-text">
+        </form>
+        <br>
+        <form action="streamS" method="post">
+            <input type="submit" value="Streaming Live: Server" id="multimedia" class="btn btn-defoult btn-block intput-text">
+        </form>
+
+      </section>
+
+      <div class="contenedor"></div>
+      <br>
+      <br>
+      <br>
+    </div>
+    <footer>
+      <h1>Mira estos</h1>
+    </footer>
+
+  </body>
+</html>

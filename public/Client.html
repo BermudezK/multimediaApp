@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <title>Clinete de Streaming</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link href="css/main.css" crossorigin="anonymous" rel="stylesheet">
+  </head >
+
+  <body class="fuente">
+    <header>
+      <h1>Cliente de Steaming Live</h1>
+    </header>
+    <div class="container">
+      <div class="principal">
+        <div class="well">
+        <p>
+          Esta pagina recibe en tiempo real el straming
+          de la camara web del usuario que genera la transmision
+        </p>
+        </div>
+        <img id="streaming" class="img-thumbnail" width="100%">
+      </div>
+    </div>
+    <footer>
+      <h1>ia tu sabes</h1>
+    </footer>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      (function(d, io){
+
+        var io=io()
+        io.on('playStream',function(image){
+          d.querySelector('#streaming').src=image
+        })
+      })(document, io)
+    </script>
+  </body>
+</html>

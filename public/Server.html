@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <title>Servidor de Streaming</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link href="css/main.css" crossorigin="anonymous" rel="stylesheet">
+  </head>
+  <body  class="fuente">
+    <header>
+      <h1>Servidor de Streaming</h1>
+    </header>
+    <div class="container">
+      <div class="principal">
+        <div class="well">
+          <p>
+            Esta pagina transmite en tiempo real el streaming
+          </p>
+        </div>
+        <video id="video" ></video>
+        <canvas id="canvas" width="1140" height="540"></canvas>
+      </div>
+    </div>
+    <footer>
+      <h1>ia tu sabes</h1>
+    </footer>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      (function(d,n,w,io){
+        var io = io(),
+            startCamera = false,
+            video = d.querySelector('#video'),
+            canvas = d.querySelector('#canvas'),
+            context = canvas.getContext('2d')
+            n.streaming= (
+              n.getUserMedia ||
+              n.webkitGetUserMedia ||
+              n.mozGetUserMedia ||
+              n.msGetUserMedia
+            )
+        n.streaming({
+          // NOTE: con esto activamos la camara y el audio
+          video:true,
+          audio: false
+        },function(stream){
+          //NOTE: funcion que se ejecuta en el caso de tener exito
+          startCamera=true
+          video.src= w.URL.createObjectURL(stream)
+        },function(err){
+          //NOTE: funcion que se ejecuta en el caso de no tener exito
+          alert(`Error al acceder a la camara web: ${err}`)
+        })
+
+        w.playVideo = (function(cb){
+          return w.requestAnimationFrame ||
+                  w.webkitRequestAnimationFrame ||
+                  w.mozRequestAnimationFrame ||
+                  w.msRequestAnimationFrame ||
+                  function(cb){
+                    w.setTimeOut(cb, 1000/100)
+                  }
+        })();
+        function streamVideo (context, canvas, video){
+        // NOTE: esta funcion lo que nos va a permitir es realizar la recaptura de las imagenes
+          var outputStream = canvas.toDataURL('image/jpeg', .35) // NOTE: convertimos las capturas a una imagen en codigo
+          context.drawImage(video,0,0,1140,720)
+          if(startCamera)
+            io.emit('streaming', outputStream)
+
+          playVideo(function(){
+            // NOTE: recursividad
+            streamVideo(context,canvas,video)
+          })
+
+        }
+        w.addEventListener('load', function(){
+          //NOTE: esta funcion se encargara de cargar en el canvas las sucesivas capturas de imagenes que haga la camara
+          video.autoPlay=true
+          video.style.display ='none'
+          streamVideo(context,canvas,video)
+        })
+      })(document,navigator, window, io)
+    </script>
+
+
+  </body>
+</html>

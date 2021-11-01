@@ -1,0 +1,19 @@
+{
+  "name": "Multimedia-Center",
+  "version": "1.0.0",
+  "description": "Servidor Multimedia",
+  "main": "server.js",
+  "engines": {
+    "node": ">=6.2.0"
+  },
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "author": "Bermudez-Vargas",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.15.3",
+    "nodemon": "^1.11.0",
+    "socket.io": "^2.0.3"
+  }
+}
